@@ -1051,10 +1051,33 @@ function HeroSection({ onGone }) {
     const onMouse = e => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
     window.addEventListener('mousemove', onMouse);
 
+    const onTouch = e => {
+      if (e.touches && e.touches[0]) {
+        mouseRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    };
+    window.addEventListener('touchmove', onTouch, { passive: true });
+    window.addEventListener('touchstart', onTouch, { passive: true });
+
     const onWheel = e => {
       wheelScrollRef.current = Math.max(0, Math.min(H * 0.85, wheelScrollRef.current + e.deltaY * 0.65));
     };
     window.addEventListener('wheel', onWheel, { passive: true });
+
+    let _lastTouchY = null;
+    const onTouchScroll = e => {
+      if (e.touches && e.touches[0]) {
+        const ty = e.touches[0].clientY;
+        if (_lastTouchY !== null) {
+          const delta = _lastTouchY - ty;
+          wheelScrollRef.current = Math.max(0, Math.min(H * 0.85, wheelScrollRef.current + delta * 0.65));
+        }
+        _lastTouchY = ty;
+      }
+    };
+    const onTouchEnd = () => { _lastTouchY = null; };
+    window.addEventListener('touchmove', onTouchScroll, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
 
     const loop = now => {
       const t  = now / 1000;
@@ -1125,7 +1148,11 @@ function HeroSection({ onGone }) {
 
     return () => {
       window.removeEventListener('mousemove', onMouse);
+      window.removeEventListener('touchmove', onTouch);
+      window.removeEventListener('touchstart', onTouch);
       window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchmove', onTouchScroll);
+      window.removeEventListener('touchend', onTouchEnd);
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
