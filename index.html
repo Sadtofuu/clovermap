@@ -30,11 +30,13 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* React overlay: container is click-through, children opt-in */
   #root {
     position: fixed; inset: 0; z-index: 10;
     pointer-events: none;
   }
 
+  /* ── MapLibre overrides ── */
   .maplibregl-map { background: #f7f9f4; }
   .maplibregl-canvas-container.maplibregl-interactive,
   .maplibregl-canvas { cursor: crosshair !important; }
@@ -51,6 +53,7 @@
   .maplibregl-ctrl-attrib a { color: #6a9a6a !important; }
   .maplibregl-ctrl-logo { display: none !important; }
 
+  /* ── Personal clover marker — canvas-based, matches eco layer ── */
   .clover-dot {
     position: relative;
     width: 26px; height: 26px;
@@ -63,14 +66,19 @@
     display: block;
     filter: drop-shadow(0 1px 3px rgba(40,90,28,0.18));
   }
-  .clover-dot:hover { transform: scale(1.42); }
-  .clover-dot--fresh { animation: cdot-appear 0.55s cubic-bezier(.22,1,.36,1) forwards; }
+  .clover-dot:hover {
+    transform: scale(1.42);
+  }
+  .clover-dot--fresh {
+    animation: cdot-appear 0.55s cubic-bezier(.22,1,.36,1) forwards;
+  }
   @keyframes cdot-appear {
     0%   { transform: scale(0.1) rotate(-10deg); opacity: 0; }
     70%  { transform: scale(1.12) rotate(3deg);  opacity: 1; }
     100% { transform: scale(1)    rotate(0deg);  opacity: 1; }
   }
 
+  /* ── Animations ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -82,7 +90,10 @@
   .anim-fade-up  { animation: fadeUp  0.9s cubic-bezier(.22,1,.36,1) forwards; }
   .anim-modal-in { animation: modalIn 0.38s cubic-bezier(.22,1,.36,1) forwards; }
 
-  #map-wrap { position: fixed; inset: 0; z-index: 1; }
+  /* ── Map wrapper ── */
+  #map-wrap {
+    position: fixed; inset: 0; z-index: 1;
+  }
   #map { position: absolute !important; inset: 0; z-index: auto !important; }
 
   input, textarea {
@@ -93,47 +104,88 @@
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-thumb { background: rgba(80,140,80,0.2); }
 
+  /* ── Ecological archive badge ── */
   #eco-badge {
-    position: fixed; bottom: 4.6rem; left: 2rem; z-index: 8;
+    position: fixed;
+    bottom: 4.6rem;
+    left: 2rem;
+    z-index: 8;
     pointer-events: none;
     font-family: "Cormorant Garamond", serif;
-    font-size: 0.52rem; letter-spacing: 0.17em; text-transform: uppercase;
-    color: rgba(72,128,58,0.48); line-height: 1.75;
+    font-size: 0.52rem;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: rgba(72,128,58,0.48);
+    line-height: 1.75;
   }
-  #eco-badge span { display: block; }
+  #eco-badge span {
+    display: block;
+  }
 
+  /* ── Data import button ── */
   #data-import {
-    position: fixed; bottom: 10.2rem; left: 2rem; z-index: 12;
+    position: fixed;
+    bottom: 10.2rem;
+    left: 2rem;
+    z-index: 12;
     pointer-events: all;
     font-family: "Cormorant Garamond", serif;
-    font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 0.56rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: rgba(72,128,58,0.55);
     background: rgba(251,253,249,0.88);
     border: 1px solid rgba(72,128,58,0.18);
-    padding: 0.38rem 0.85rem; cursor: pointer;
+    padding: 0.38rem 0.85rem;
+    cursor: pointer;
     transition: all 0.22s;
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    user-select: none; white-space: nowrap;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    user-select: none;
+    white-space: nowrap;
   }
-  #data-import:hover { color: rgba(40,100,30,0.82); border-color: rgba(72,128,58,0.45); background: rgba(251,253,249,0.96); }
-  #data-import.loaded { color: rgba(40,100,30,0.75); border-color: rgba(72,128,58,0.42); }
+  #data-import:hover {
+    color: rgba(40,100,30,0.82);
+    border-color: rgba(72,128,58,0.45);
+    background: rgba(251,253,249,0.96);
+  }
+  #data-import.loaded {
+    color: rgba(40,100,30,0.75);
+    border-color: rgba(72,128,58,0.42);
+  }
 
+  /* ── Layer toggle pill ── */
   #eco-toggle {
-    position: fixed; bottom: 7.2rem; left: 2rem; z-index: 12;
+    position: fixed;
+    bottom: 7.2rem;
+    left: 2rem;
+    z-index: 12;
     pointer-events: all;
     font-family: "Cormorant Garamond", serif;
-    font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 0.56rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: rgba(72,128,58,0.6);
     background: rgba(251,253,249,0.88);
     border: 1px solid rgba(72,128,58,0.22);
-    padding: 0.38rem 0.85rem; cursor: pointer;
+    padding: 0.38rem 0.85rem;
+    cursor: pointer;
     transition: all 0.22s;
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     user-select: none;
   }
-  #eco-toggle:hover { color: rgba(40,100,30,0.85); border-color: rgba(72,128,58,0.5); background: rgba(251,253,249,0.96); }
-  #eco-toggle.active { color: rgba(40,100,30,0.9); border-color: rgba(72,128,58,0.55); }
+  #eco-toggle:hover {
+    color: rgba(40,100,30,0.85);
+    border-color: rgba(72,128,58,0.5);
+    background: rgba(251,253,249,0.96);
+  }
+  #eco-toggle.active {
+    color: rgba(40,100,30,0.9);
+    border-color: rgba(72,128,58,0.55);
+  }
 
+  /* ── Hero intro overlay ── */
   @keyframes heroFadeUp {
     from { opacity: 0; transform: translateY(22px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -146,39 +198,54 @@
     0%,100% { filter: brightness(1); }
     50%     { filter: brightness(1.08); }
   }
+  /* Floating objects fade in on load (spring loop takes over after) */
   @keyframes heroObjIn {
     from { opacity: 0; }
     to   { opacity: 0.88; }
   }
 
-  #map-wrap { transition: filter 1.9s cubic-bezier(0.22,1,0.36,1); }
-  #map-wrap.hero-mode { filter: brightness(0.38) saturate(0.18); }
+  /* Map is dimmed while hero is visible */
+  #map-wrap {
+    transition: filter 1.9s cubic-bezier(0.22,1,0.36,1);
+  }
+  #map-wrap.hero-mode {
+    filter: brightness(0.38) saturate(0.18);
+  }
 
-  #eco-badge, #data-import, #eco-toggle { opacity: 0; }
+  /* Non-React UI elements: hidden until hero exits */
+  #eco-badge, #data-import, #eco-toggle {
+    opacity: 0;
+  }
 </style>
 </head>
 <body>
 
+<!-- ── Map layer (behind everything) ── -->
 <div id="map-wrap">
   <div id="map"></div>
 </div>
 
+<!-- ── Eco archive badge ── -->
 <div id="eco-badge">
   <span>Ecological archive · GBIF occurrence data</span>
   <span>Loading distribution records…</span>
 </div>
 
+<!-- ── Data import (GBIF .zip or .geojson) ── -->
 <button id="data-import" title="Import GBIF occurrence data (.zip or .geojson)">
   ↑ Import data
 </button>
 <input id="data-file-input" type="file" accept=".zip,.geojson,.json" style="display:none">
 
+<!-- ── Eco layer toggle ── -->
 <button id="eco-toggle" class="active" title="Toggle ecological layer">
   ☘ Eco layer
 </button>
 
+<!-- ── React UI overlay ── -->
 <div id="root"></div>
 
+<!-- ── MapLibre initialisation ── -->
 <script>
 const MAP_STYLE = 'https://api.maptiler.com/maps/019e0fc7-f14f-7ddf-b456-9bbc149d3de7/style.json?key=t449CKlwHC20NkKrdJiY';
 
@@ -195,9 +262,13 @@ const map = new maplibregl.Map({
   dragRotate: false,
 });
 
-map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
+map.addControl(
+  new maplibregl.AttributionControl({ compact: true }),
+  'bottom-right'
+);
 
 window.mapInstance = map;
+
 window.mapReady = new Promise(resolve => {
   if (map.isStyleLoaded()) resolve();
   else map.once('load', resolve);
@@ -272,22 +343,30 @@ function toGBIF_FC(features) {
   return {
     type: 'FeatureCollection',
     features: (features || [])
-      .filter(f => { const c = f?.geometry?.coordinates; return c && isValidOccurrence(c[0], c[1]); })
+      .filter(f => {
+        const c = f?.geometry?.coordinates;
+        return c && isValidOccurrence(c[0], c[1]);
+      })
       .map(f => ({
         type: 'Feature',
         geometry: { type: 'Point', coordinates: f.geometry.coordinates },
-        properties: { intensity: 0.7, species: f.properties?.species || f.properties?.scientificName || 'Marsilea quadrifolia' }
+        properties: {
+          intensity: 0.7,
+          species: f.properties?.species || f.properties?.scientificName || 'Marsilea quadrifolia'
+        }
       }))
   };
 }
 
 const FALLBACK_FC = {
   type: 'FeatureCollection',
-  features: GBIF_RAW.filter(d => isValidOccurrence(d[0], d[1])).map(d => ({
-    type: 'Feature',
-    geometry: { type: 'Point', coordinates: [d[0], d[1]] },
-    properties: { intensity: 0.7, species: 'Marsilea quadrifolia' }
-  }))
+  features: GBIF_RAW
+    .filter(d => isValidOccurrence(d[0], d[1]))
+    .map(d => ({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [d[0], d[1]] },
+      properties: { intensity: 0.7, species: 'Marsilea quadrifolia' }
+    }))
 };
 
 async function loadEcoFC() {
@@ -295,22 +374,32 @@ async function loadEcoFC() {
     const resp = await fetch('./clover_map_data.geojson', { cache: 'force-cache' });
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const raw  = await resp.json();
-    const clean = (raw.features || []).filter(f => { const c = f?.geometry?.coordinates; return c && isValidOccurrence(c[0], c[1]); });
+    const clean = (raw.features || []).filter(f => {
+      const c = f?.geometry?.coordinates;
+      return c && isValidOccurrence(c[0], c[1]);
+    });
     const fc = {
       type: 'FeatureCollection',
       features: clean.map(f => ({
         type: 'Feature',
         geometry: { type: 'Point', coordinates: f.geometry.coordinates },
-        properties: { intensity: 0.7, species: f.properties?.species || f.properties?.scientificName || 'Marsilea quadrifolia' }
+        properties: {
+          intensity: 0.7,
+          species: f.properties?.species || f.properties?.scientificName || 'Marsilea quadrifolia'
+        }
       }))
     };
     const sp  = fc.features[0]?.properties?.species || 'Marsilea quadrifolia';
     const badge = document.getElementById('eco-badge');
-    if (badge) badge.innerHTML = `<span>Ecological archive · GBIF occurrence data</span><span>${sp} · ${fc.features.length.toLocaleString()} records</span>`;
+    if (badge) badge.innerHTML =
+      `<span>Ecological archive · GBIF occurrence data</span>
+       <span>${sp} · ${fc.features.length.toLocaleString()} records</span>`;
     return fc;
   } catch {
     const badge = document.getElementById('eco-badge');
-    if (badge) badge.innerHTML = `<span>Ecological archive · GBIF occurrence data</span><span>Marsilea quadrifolia · ${FALLBACK_FC.features.length} records · worldwide</span>`;
+    if (badge) badge.innerHTML =
+      `<span>Ecological archive · GBIF occurrence data</span>
+       <span>Marsilea quadrifolia · ${FALLBACK_FC.features.length} records · worldwide</span>`;
     return FALLBACK_FC;
   }
 }
@@ -320,17 +409,25 @@ const ECO_LAYERS = ['clover-clusters', 'clover-points'];
 
 window.mapReady.then(async () => {
   const GBIF_FC = await loadEcoFC();
+
   const styleLayers = map.getStyle().layers;
   const firstSymbolId = styleLayers.find(l => l.type === 'symbol')?.id;
 
-  map.addSource('clover-gbif', { type: 'geojson', data: GBIF_FC, cluster: true, clusterMaxZoom: 10, clusterRadius: 45 });
+  map.addSource('clover-gbif', {
+    type: 'geojson',
+    data: GBIF_FC,
+    cluster: true,
+    clusterMaxZoom: 10,
+    clusterRadius: 45,
+  });
 
   function makeCloverCanvas(size, alpha) {
-    const c = document.createElement('canvas');
-    c.width = c.height = size;
+    const c   = document.createElement('canvas');
+    c.width   = c.height = size;
     const ctx = c.getContext('2d');
-    const cx = size / 2, cy = size / 2;
-    const ps = size * 0.255;
+    const cx  = size / 2, cy = size / 2;
+    const ps  = size * 0.255;
+
     [0, Math.PI / 2, Math.PI, 3 * Math.PI / 2].forEach(angle => {
       const gcx = cx + Math.sin(angle) * size * 0.30;
       const gcy = cy - Math.cos(angle) * size * 0.30;
@@ -338,11 +435,13 @@ window.mapReady.then(async () => {
       grad.addColorStop(0,    `rgba(212, 238, 198, ${alpha})`);
       grad.addColorStop(0.50, `rgba(186, 220, 168, ${alpha * 0.92})`);
       grad.addColorStop(1.00, `rgba(158, 200, 138, ${alpha * 0.76})`);
+
       ctx.save();
       ctx.translate(cx, cy);
       ctx.rotate(angle);
       ctx.scale(ps, ps);
       ctx.translate(0, -0.52);
+
       ctx.beginPath();
       ctx.moveTo(0, 0.56);
       ctx.bezierCurveTo( 0.85,  0.42,  1.02, -0.18,  0.50, -0.54);
@@ -354,6 +453,7 @@ window.mapReady.then(async () => {
       ctx.fill();
       ctx.restore();
     });
+
     return c;
   }
   window.makeCloverCanvas = makeCloverCanvas;
@@ -375,17 +475,23 @@ window.mapReady.then(async () => {
     const p = pngC.getContext('2d');
     const ins = Math.round(sz * 0.06);
     p.drawImage(srcImg, ins, ins, sz - ins * 2, sz - ins * 2);
+
     const px = p.getImageData(0, 0, sz, sz);
     const d  = px.data;
     for (let i = 0; i < d.length; i += 4) {
       const r = d[i], g = d[i + 1], b = d[i + 2];
       const greenBias  = g - Math.max(r, b);
       const brightness = (r + g + b) / 765;
-      if (greenBias < 5 && brightness > 0.91) { d[i + 3] = 0; }
-      else if (greenBias < 16) { d[i + 3] = Math.round((greenBias / 16) * alpha * 255); }
-      else { d[i + 3] = Math.round(alpha * 255); }
+      if (greenBias < 5 && brightness > 0.91) {
+        d[i + 3] = 0;
+      } else if (greenBias < 16) {
+        d[i + 3] = Math.round((greenBias / 16) * alpha * 255);
+      } else {
+        d[i + 3] = Math.round(alpha * 255);
+      }
     }
     p.putImageData(px, 0, 0);
+
     const glowC = document.createElement('canvas');
     glowC.width = glowC.height = sz;
     const gl = glowC.getContext('2d');
@@ -393,6 +499,7 @@ window.mapReady.then(async () => {
     gl.filter = `blur(${blurPx}px)`;
     gl.drawImage(pngC, 0, 0);
     gl.filter = 'none';
+
     const out = document.createElement('canvas');
     out.width = out.height = sz;
     const f = out.getContext('2d');
@@ -404,48 +511,78 @@ window.mapReady.then(async () => {
   }
 
   function applyPNGToImages(srcImg) {
-    [['eco-clover-sm',36,0.76],['eco-clover-md',48,0.80],['eco-clover-lg',60,0.84],['eco-clover-dot',18,0.68]].forEach(([id,sz,a]) => {
-      try { map.updateImage(id, canvasToSpec(buildCloverIcon(srcImg, sz, a))); } catch(e) {}
+    [['eco-clover-sm',36,0.76],['eco-clover-md',48,0.80],
+     ['eco-clover-lg',60,0.84],['eco-clover-dot',18,0.68]].forEach(([id,sz,a]) => {
+      try { map.updateImage(id, canvasToSpec(buildCloverIcon(srcImg, sz, a))); }
+      catch(e) {}
     });
-    try { window.cloverPNGCanvas = buildCloverIcon(srcImg, 26, 0.88); } catch(e) {}
+    try { window.cloverPNGCanvas = buildCloverIcon(srcImg, 26, 0.88); }
+    catch(e) {}
   }
 
   try {
     const result = map.loadImage('./clover-icon.png');
     if (result && typeof result.then === 'function') {
-      result.then(res => { const img = (res && res.data) ? res.data : res; if (img) applyPNGToImages(img); }).catch(() => {});
+      result.then(res => {
+        const img = (res && res.data) ? res.data : res;
+        if (img) applyPNGToImages(img);
+      }).catch(() => {});
     }
   } catch(e) {}
 
   map.addLayer({
-    id: 'clover-clusters', type: 'symbol', source: 'clover-gbif',
+    id: 'clover-clusters',
+    type: 'symbol',
+    source: 'clover-gbif',
     filter: ['has', 'point_count'],
     layout: {
-      'icon-image': ['step', ['get', 'point_count'], 'eco-clover-sm', 25, 'eco-clover-md', 80, 'eco-clover-lg'],
-      'icon-allow-overlap': true, 'icon-size': 1,
+      'icon-image': [
+        'step', ['get', 'point_count'],
+        'eco-clover-sm',  25,
+        'eco-clover-md',  80,
+        'eco-clover-lg',
+      ],
+      'icon-allow-overlap': true,
+      'icon-size': 1,
       'text-field': ['get', 'point_count_abbreviated'],
-      'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
-      'text-size': ['step', ['get', 'point_count'], 8, 25, 10, 80, 12],
-      'text-anchor': 'center', 'text-allow-overlap': true, 'text-offset': [0, 0],
+      'text-font':  ['Open Sans Regular', 'Arial Unicode MS Regular'],
+      'text-size':  ['step', ['get', 'point_count'], 8, 25, 10, 80, 12],
+      'text-anchor': 'center',
+      'text-allow-overlap': true,
+      'text-offset': [0, 0],
     },
-    paint: { 'text-color': 'rgba(38,78,26,0.88)', 'text-halo-color': 'rgba(228,244,218,0.60)', 'text-halo-width': 0.8 }
+    paint: {
+      'text-color': 'rgba(38,78,26,0.88)',
+      'text-halo-color': 'rgba(228,244,218,0.60)',
+      'text-halo-width': 0.8,
+    }
   });
 
   map.addLayer({
-    id: 'clover-points', type: 'symbol', source: 'clover-gbif',
+    id: 'clover-points',
+    type: 'symbol',
+    source: 'clover-gbif',
     filter: ['!', ['has', 'point_count']],
     layout: {
-      'icon-image': 'eco-clover-dot', 'icon-allow-overlap': false,
+      'icon-image': 'eco-clover-dot',
+      'icon-allow-overlap': false,
       'icon-size': ['interpolate', ['linear'], ['zoom'], 7, 0.55, 10, 0.85, 14, 1.15],
       'icon-anchor': 'center',
     },
-    paint: { 'icon-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0.40, 10, 0.72, 13, 0.88] }
+    paint: {
+      'icon-opacity': ['interpolate', ['linear'], ['zoom'], 7, 0.40, 10, 0.72, 13, 0.88],
+    }
   });
 
   map.on('click', 'clover-clusters', e => {
     window.suppressNextMapClick?.();
-    map.easeTo({ center: e.features[0].geometry.coordinates, zoom: map.getZoom() + 2.8, duration: 550 });
+    map.easeTo({
+      center: e.features[0].geometry.coordinates,
+      zoom:   map.getZoom() + 2.8,
+      duration: 550,
+    });
   });
+
   map.on('mouseenter', 'clover-clusters', () => { map.getCanvas().style.cursor = 'zoom-in'; });
   map.on('mouseleave', 'clover-clusters', () => { map.getCanvas().style.cursor = 'crosshair'; });
   map.on('mouseenter', 'clover-points',   () => { map.getCanvas().style.cursor = 'default'; });
@@ -458,23 +595,32 @@ function updateMapSource(fc) {
     if (src) src.setData(fc);
     const sp    = fc.features[0]?.properties?.species || 'Marsilea quadrifolia';
     const badge = document.getElementById('eco-badge');
-    if (badge) badge.innerHTML = `<span>Ecological archive · GBIF occurrence data</span><span>${sp} · ${fc.features.length.toLocaleString()} records</span>`;
+    if (badge) badge.innerHTML =
+      `<span>Ecological archive · GBIF occurrence data</span>
+       <span>${sp} · ${fc.features.length.toLocaleString()} records</span>`;
   });
 }
 
 async function processGBIFZip(file) {
   if (!window.JSZip) throw new Error('JSZip not loaded');
   const zip = await JSZip.loadAsync(file);
-  const occEntry = Object.values(zip.files).find(f => !f.dir && /occurrence/i.test(f.name) && /\.(txt|csv|tsv)$/i.test(f.name))
-    || Object.values(zip.files).find(f => !f.dir && /occurrence/i.test(f.name));
+
+  const occEntry = Object.values(zip.files).find(f =>
+    !f.dir && /occurrence/i.test(f.name) && /\.(txt|csv|tsv)$/i.test(f.name)
+  ) || Object.values(zip.files).find(f =>
+    !f.dir && /occurrence/i.test(f.name)
+  );
   if (!occEntry) throw new Error('No occurrence file found in zip');
+
   const text    = await occEntry.async('string');
   const lines   = text.split(/\r?\n/);
   const headers = lines[0].split('\t');
+
   const latIdx = headers.indexOf('decimalLatitude');
   const lngIdx = headers.indexOf('decimalLongitude');
   const spIdx  = headers.indexOf('species');
-  if (latIdx < 0 || lngIdx < 0) throw new Error('Missing lat/lng columns');
+  if (latIdx < 0 || lngIdx < 0) throw new Error('Missing lat/lng columns in occurrence data');
+
   const features = [];
   for (let i = 1; i < lines.length; i++) {
     if (!lines[i].trim()) continue;
@@ -482,21 +628,36 @@ async function processGBIFZip(file) {
     const lat  = parseFloat(cols[latIdx]);
     const lng  = parseFloat(cols[lngIdx]);
     if (!isValidOccurrence(lng, lat)) continue;
-    features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [lng, lat] }, properties: { intensity: 0.7, species: (spIdx >= 0 ? cols[spIdx] : '') || 'Marsilea quadrifolia' } });
+    features.push({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [lng, lat] },
+      properties: {
+        intensity: 0.7,
+        species: (spIdx >= 0 ? cols[spIdx] : '') || 'Marsilea quadrifolia',
+      }
+    });
   }
+
   let sampled = features;
-  if (features.length > 10000) { const step = Math.ceil(features.length / 10000); sampled = features.filter((_, i) => i % step === 0); }
+  if (features.length > 10000) {
+    const step = Math.ceil(features.length / 10000);
+    sampled = features.filter((_, i) => i % step === 0);
+  }
   return { type: 'FeatureCollection', features: sampled };
 }
 
 const _importBtn   = document.getElementById('data-import');
 const _importInput = document.getElementById('data-file-input');
+
 _importBtn.addEventListener('click', () => _importInput.click());
+
 _importInput.addEventListener('change', async e => {
   const file = e.target.files[0];
   if (!file) return;
+
   _importBtn.textContent = '⟳ Loading…';
   _importBtn.style.pointerEvents = 'none';
+
   try {
     let fc;
     if (file.name.endsWith('.zip')) {
@@ -505,9 +666,21 @@ _importInput.addEventListener('change', async e => {
       const raw  = await file.text();
       const data = JSON.parse(raw);
       if (Array.isArray(data)) {
-        fc = { type: 'FeatureCollection', features: data.filter(d => isValidOccurrence(Array.isArray(d) ? d[0] : d.lng, Array.isArray(d) ? d[1] : d.lat)).map(d => ({ type: 'Feature', geometry: { type: 'Point', coordinates: Array.isArray(d) ? [d[0], d[1]] : [d.lng, d.lat] }, properties: { intensity: 0.7, species: d.species || 'Marsilea quadrifolia' } })) };
-      } else { fc = toGBIF_FC(data.features || []); }
+        fc = {
+          type: 'FeatureCollection',
+          features: data
+            .filter(d => isValidOccurrence(Array.isArray(d) ? d[0] : d.lng, Array.isArray(d) ? d[1] : d.lat))
+            .map(d => ({
+              type: 'Feature',
+              geometry: { type: 'Point', coordinates: Array.isArray(d) ? [d[0], d[1]] : [d.lng, d.lat] },
+              properties: { intensity: 0.7, species: d.species || 'Marsilea quadrifolia' }
+            }))
+        };
+      } else {
+        fc = toGBIF_FC(data.features || []);
+      }
     }
+
     updateMapSource(fc);
     _importBtn.textContent = `✓ ${fc.features.length.toLocaleString()} records`;
     _importBtn.classList.add('loaded');
@@ -517,6 +690,7 @@ _importInput.addEventListener('change', async e => {
     _importBtn.style.pointerEvents = 'all';
     console.error('[GBIF import]', err);
   }
+
   _importInput.value = '';
 });
 
@@ -525,13 +699,17 @@ document.getElementById('eco-toggle').addEventListener('click', () => {
   const btn = document.getElementById('eco-toggle');
   btn.classList.toggle('active', ecoLayersVisible);
   btn.textContent = ecoLayersVisible ? '☘ Eco layer' : '○  Eco layer';
+
   window.mapReady.then(() => {
     const vis = ecoLayersVisible ? 'visible' : 'none';
-    ECO_LAYERS.forEach(id => { if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', vis); });
+    ECO_LAYERS.forEach(id => {
+      if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', vis);
+    });
   });
 });
 </script>
 
+<!-- ── React App ── -->
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback } = React;
 
@@ -546,8 +724,12 @@ function Particles() {
     resize();
     addEventListener('resize', resize);
     const pts = Array.from({ length: 48 }, () => ({
-      x: Math.random() * innerWidth, y: Math.random() * innerHeight,
-      r: Math.random() * 1.1 + 0.28, vx: (Math.random() - .5) * .17, vy: (Math.random() - .5) * .17, a: Math.random() * .17 + .04,
+      x:  Math.random() * innerWidth,
+      y:  Math.random() * innerHeight,
+      r:  Math.random() * 1.1 + 0.28,
+      vx: (Math.random() - .5) * .17,
+      vy: (Math.random() - .5) * .17,
+      a:  Math.random() * .17 + .04,
     }));
     let id;
     const tick = () => {
@@ -555,21 +737,32 @@ function Particles() {
       pts.forEach(p => {
         p.x = (p.x + p.vx + canvas.width)  % canvas.width;
         p.y = (p.y + p.vy + canvas.height) % canvas.height;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(50,118,50,${p.a})`; ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(50,118,50,${p.a})`;
+        ctx.fill();
       });
       id = requestAnimationFrame(tick);
     };
     tick();
     return () => { cancelAnimationFrame(id); removeEventListener('resize', resize); };
   }, []);
-  return <canvas ref={ref} style={{ position:'fixed', inset:0, pointerEvents:'none', zIndex:6 }}/>;
+  return (
+    <canvas
+      ref={ref}
+      style={{ position:'fixed', inset:0, pointerEvents:'none', zIndex:6 }}
+    />
+  );
 }
 
 const IS = {
-  width:'100%', background:'transparent', border:'none', borderBottom:'1px solid rgba(60,130,60,0.22)',
-  padding:'0.42rem 0', fontFamily:'"Cormorant Garamond", Georgia, serif',
-  fontSize:'1rem', color:'#1a3a1a', outline:'none', resize:'none', lineHeight:1.6, transition:'border-bottom-color 0.22s',
+  width:'100%', background:'transparent',
+  border:'none', borderBottom:'1px solid rgba(60,130,60,0.22)',
+  padding:'0.42rem 0',
+  fontFamily:'"Cormorant Garamond", Georgia, serif',
+  fontSize:'1rem', color:'#1a3a1a',
+  outline:'none', resize:'none', lineHeight:1.6,
+  transition:'border-bottom-color 0.22s',
 };
 const fb = e => { e.target.style.borderBottomColor = 'rgba(50,140,60,0.72)'; };
 const bb = e => { e.target.style.borderBottomColor = 'rgba(60,130,60,0.22)'; };
@@ -579,30 +772,108 @@ function UploadModal({ onClose, onSubmit }) {
   const [location, setLocation] = useState('');
   const [note,     setNote]     = useState('');
   const fileRef = useRef(null);
+
   const loadFile = f => {
     if (!f || !f.type.startsWith('image/')) return;
     const r = new FileReader();
     r.onload = e => setPreview(e.target.result);
     r.readAsDataURL(f);
   };
+
   return (
-    <div onClick={e => e.target === e.currentTarget && onClose()} style={{ position:'fixed', inset:0, zIndex:50, pointerEvents:'all', background:'rgba(218,232,218,0.38)', backdropFilter:'blur(16px)', WebkitBackdropFilter:'blur(16px)', display:'flex', alignItems:'center', justifyContent:'center', padding:'1.5rem' }}>
-      <div className="anim-modal-in" style={{ background:'rgba(253,255,251,0.98)', border:'1px solid rgba(60,130,60,0.12)', boxShadow:'0 28px 80px rgba(30,80,30,0.1)', padding:'3rem', width:'430px', maxWidth:'100%', position:'relative' }}>
-        <button onClick={onClose} style={{ position:'absolute', top:'1.2rem', right:'1.5rem', background:'none', border:'none', cursor:'pointer', pointerEvents:'all', fontFamily:'"Cormorant Garamond", serif', fontSize:'1.1rem', color:'#aacaaa', transition:'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#3a8a3a'} onMouseLeave={e => e.target.style.color = '#aacaaa'}>✕</button>
-        <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.57rem', letterSpacing:'0.25em', textTransform:'uppercase', color:'#6a9a6a', marginBottom:'0.45rem' }}>Record a Finding</p>
-        <h2 style={{ fontFamily:'"Cormorant", "Cormorant Garamond", serif', fontWeight:300, fontSize:'1.8rem', color:'#1a3a1a', lineHeight:1.2, marginBottom:'2rem' }}>Mark Your <em style={{ fontStyle:'italic', color:'#3a8a3a' }}>Lucky Clover</em></h2>
-        <div onClick={() => fileRef.current?.click()} onDragOver={e => e.preventDefault()} onDrop={e => { e.preventDefault(); loadFile(e.dataTransfer.files[0]); }} style={{ border:'1px dashed rgba(60,130,60,0.28)', padding:'1.4rem', textAlign:'center', cursor:'pointer', minHeight:'114px', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'1.5rem', transition:'border-color 0.2s, background 0.2s' }} onMouseEnter={e => { e.currentTarget.style.borderColor='rgba(50,140,60,0.6)'; e.currentTarget.style.background='rgba(50,140,60,0.03)'; }} onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(60,130,60,0.28)'; e.currentTarget.style.background='transparent'; }}>
-          {preview ? <img src={preview} alt="" style={{ maxHeight:'140px', maxWidth:'100%', objectFit:'cover' }}/> : <div><div style={{ fontSize:'1.6rem', color:'#aacaaa', marginBottom:'0.4rem' }}>☘</div><p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.78rem', color:'#aacaaa', fontStyle:'italic', letterSpacing:'0.05em' }}>Upload or drop a photo</p></div>}
+    <div
+      onClick={e => e.target === e.currentTarget && onClose()}
+      style={{
+        position:'fixed', inset:0, zIndex:50, pointerEvents:'all',
+        background:'rgba(218,232,218,0.38)',
+        backdropFilter:'blur(16px)', WebkitBackdropFilter:'blur(16px)',
+        display:'flex', alignItems:'center', justifyContent:'center',
+        padding:'1.5rem',
+      }}
+    >
+      <div
+        className="anim-modal-in"
+        style={{
+          background:'rgba(253,255,251,0.98)',
+          border:'1px solid rgba(60,130,60,0.12)',
+          boxShadow:'0 28px 80px rgba(30,80,30,0.1)',
+          padding:'3rem', width:'430px', maxWidth:'100%', position:'relative',
+        }}
+      >
+        <button
+          onClick={onClose}
+          style={{
+            position:'absolute', top:'1.2rem', right:'1.5rem',
+            background:'none', border:'none', cursor:'pointer', pointerEvents:'all',
+            fontFamily:'"Cormorant Garamond", serif',
+            fontSize:'1.1rem', color:'#aacaaa', transition:'color 0.2s',
+          }}
+          onMouseEnter={e => e.target.style.color = '#3a8a3a'}
+          onMouseLeave={e => e.target.style.color = '#aacaaa'}
+        >✕</button>
+
+        <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.57rem', letterSpacing:'0.25em', textTransform:'uppercase', color:'#6a9a6a', marginBottom:'0.45rem' }}>
+          Record a Finding
+        </p>
+        <h2 style={{ fontFamily:'"Cormorant", "Cormorant Garamond", serif', fontWeight:300, fontSize:'1.8rem', color:'#1a3a1a', lineHeight:1.2, marginBottom:'2rem' }}>
+          Mark Your <em style={{ fontStyle:'italic', color:'#3a8a3a' }}>Lucky Clover</em>
+        </h2>
+
+        <div
+          onClick={() => fileRef.current?.click()}
+          onDragOver={e => e.preventDefault()}
+          onDrop={e => { e.preventDefault(); loadFile(e.dataTransfer.files[0]); }}
+          style={{
+            border:'1px dashed rgba(60,130,60,0.28)',
+            padding:'1.4rem', textAlign:'center', cursor:'pointer',
+            minHeight:'114px', display:'flex', alignItems:'center', justifyContent:'center',
+            marginBottom:'1.5rem', transition:'border-color 0.2s, background 0.2s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor='rgba(50,140,60,0.6)'; e.currentTarget.style.background='rgba(50,140,60,0.03)'; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(60,130,60,0.28)'; e.currentTarget.style.background='transparent'; }}
+        >
+          {preview
+            ? <img src={preview} alt="" style={{ maxHeight:'140px', maxWidth:'100%', objectFit:'cover' }}/>
+            : <div>
+                <div style={{ fontSize:'1.6rem', color:'#aacaaa', marginBottom:'0.4rem' }}>☘</div>
+                <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.78rem', color:'#aacaaa', fontStyle:'italic', letterSpacing:'0.05em' }}>Upload or drop a photo</p>
+              </div>
+          }
         </div>
         <input ref={fileRef} type="file" accept="image/*" onChange={e => loadFile(e.target.files[0])} style={{ display:'none' }}/>
-        {[{ label:'Location', value:location, setter:setLocation, placeholder:'Where did you find it?' }, { label:'Your Story', value:note, setter:setNote, placeholder:'A moment worth keeping…', multi:true }].map(({ label, value, setter, placeholder, multi }) => (
+
+        {[
+          { label:'Location', value:location, setter:setLocation, placeholder:'Where did you find it?' },
+          { label:'Your Story', value:note, setter:setNote, placeholder:'A moment worth keeping…', multi:true },
+        ].map(({ label, value, setter, placeholder, multi }) => (
           <div key={label} style={{ marginBottom:'1.3rem' }}>
-            <label style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.55rem', letterSpacing:'0.2em', textTransform:'uppercase', color:'#6a9a6a', display:'block', marginBottom:'0.35rem' }}>{label}</label>
-            {multi ? <textarea value={value} onChange={e=>setter(e.target.value)} placeholder={placeholder} rows={2} style={IS} onFocus={fb} onBlur={bb}/> : <input type="text" value={value} onChange={e=>setter(e.target.value)} placeholder={placeholder} style={IS} onFocus={fb} onBlur={bb}/>}
+            <label style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.55rem', letterSpacing:'0.2em', textTransform:'uppercase', color:'#6a9a6a', display:'block', marginBottom:'0.35rem' }}>
+              {label}
+            </label>
+            {multi
+              ? <textarea value={value} onChange={e=>setter(e.target.value)} placeholder={placeholder} rows={2} style={IS} onFocus={fb} onBlur={bb}/>
+              : <input type="text" value={value} onChange={e=>setter(e.target.value)} placeholder={placeholder} style={IS} onFocus={fb} onBlur={bb}/>
+            }
           </div>
         ))}
+
         <div style={{ textAlign:'center', marginTop:'2.2rem' }}>
-          <button onClick={() => { onSubmit({ preview, location, note }); onClose(); }} style={{ background:'transparent', border:'1px solid rgba(60,130,60,0.42)', color:'#2a7a2a', fontFamily:'"Cormorant Garamond", serif', fontSize:'0.67rem', letterSpacing:'0.24em', textTransform:'uppercase', padding:'0.88rem 3rem', cursor:'pointer', transition:'all 0.2s', pointerEvents:'all' }} onMouseEnter={e => { e.currentTarget.style.background='rgba(60,130,60,0.07)'; e.currentTarget.style.borderColor='rgba(60,130,60,0.75)'; }} onMouseLeave={e => { e.currentTarget.style.background='transparent'; e.currentTarget.style.borderColor='rgba(60,130,60,0.42)'; }}>Plant This Clover</button>
+          <button
+            onClick={() => { onSubmit({ preview, location, note }); onClose(); }}
+            style={{
+              background:'transparent',
+              border:'1px solid rgba(60,130,60,0.42)',
+              color:'#2a7a2a',
+              fontFamily:'"Cormorant Garamond", serif',
+              fontSize:'0.67rem', letterSpacing:'0.24em', textTransform:'uppercase',
+              padding:'0.88rem 3rem', cursor:'pointer',
+              transition:'all 0.2s', pointerEvents:'all',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background='rgba(60,130,60,0.07)'; e.currentTarget.style.borderColor='rgba(60,130,60,0.75)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background='transparent'; e.currentTarget.style.borderColor='rgba(60,130,60,0.42)'; }}
+          >
+            Plant This Clover
+          </button>
         </div>
       </div>
     </div>
@@ -613,14 +884,51 @@ function DetailPanel({ marker, onClose }) {
   const fmt = ts => new Date(ts).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
   return (
     <>
-      <div onClick={onClose} style={{ position:'fixed', inset:0, zIndex:58, pointerEvents:'all', background:'rgba(218,232,218,0.35)', backdropFilter:'blur(12px)', WebkitBackdropFilter:'blur(12px)' }}/>
-      <div className="anim-modal-in" style={{ position:'fixed', top:'50%', left:'50%', transform:'translate(-50%,-50%)', zIndex:59, pointerEvents:'all', background:'rgba(253,255,251,0.98)', border:'1px solid rgba(60,130,60,0.12)', boxShadow:'0 28px 80px rgba(30,80,30,0.12)', padding:'2.5rem', width:'365px', maxWidth:'92vw' }}>
-        {marker.preview && <img src={marker.preview} alt="" style={{ width:'100%', height:'156px', objectFit:'cover', marginBottom:'1.3rem' }}/>}
-        <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.55rem', letterSpacing:'0.2em', textTransform:'uppercase', color:'#6a9a6a', marginBottom:'0.4rem' }}>{fmt(marker.ts || Date.now())}</p>
-        <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.95rem', letterSpacing:'0.04em', color:'#2a6a2a', marginBottom:'0.9rem' }}>{marker.location || 'Unknown Location'}</p>
-        {marker.note && <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'1.1rem', fontStyle:'italic', color:'#3a5a3a', lineHeight:1.72 }}>"{marker.note}"</p>}
-        {!marker.preview && !marker.note && <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.9rem', fontStyle:'italic', color:'#aacaaa' }}>Found here — no note yet.</p>}
-        <button onClick={onClose} style={{ marginTop:'1.6rem', background:'none', border:'none', cursor:'pointer', pointerEvents:'all', fontFamily:'"Cormorant Garamond", serif', fontSize:'0.6rem', letterSpacing:'0.2em', textTransform:'uppercase', color:'#aacaaa', transition:'color 0.2s', padding:0 }} onMouseEnter={e => e.target.style.color = '#2a7a2a'} onMouseLeave={e => e.target.style.color = '#aacaaa'}>Close</button>
+      <div
+        onClick={onClose}
+        style={{ position:'fixed', inset:0, zIndex:58, pointerEvents:'all', background:'rgba(218,232,218,0.35)', backdropFilter:'blur(12px)', WebkitBackdropFilter:'blur(12px)' }}
+      />
+      <div
+        className="anim-modal-in"
+        style={{
+          position:'fixed', top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+          zIndex:59, pointerEvents:'all',
+          background:'rgba(253,255,251,0.98)',
+          border:'1px solid rgba(60,130,60,0.12)',
+          boxShadow:'0 28px 80px rgba(30,80,30,0.12)',
+          padding:'2.5rem', width:'365px', maxWidth:'92vw',
+        }}
+      >
+        {marker.preview && (
+          <img src={marker.preview} alt="" style={{ width:'100%', height:'156px', objectFit:'cover', marginBottom:'1.3rem' }}/>
+        )}
+        <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.55rem', letterSpacing:'0.2em', textTransform:'uppercase', color:'#6a9a6a', marginBottom:'0.4rem' }}>
+          {fmt(marker.ts || Date.now())}
+        </p>
+        <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.95rem', letterSpacing:'0.04em', color:'#2a6a2a', marginBottom:'0.9rem' }}>
+          {marker.location || 'Unknown Location'}
+        </p>
+        {marker.note && (
+          <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'1.1rem', fontStyle:'italic', color:'#3a5a3a', lineHeight:1.72 }}>
+            "{marker.note}"
+          </p>
+        )}
+        {!marker.preview && !marker.note && (
+          <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.9rem', fontStyle:'italic', color:'#aacaaa' }}>
+            Found here — no note yet.
+          </p>
+        )}
+        <button
+          onClick={onClose}
+          style={{
+            marginTop:'1.6rem', background:'none', border:'none', cursor:'pointer', pointerEvents:'all',
+            fontFamily:'"Cormorant Garamond", serif',
+            fontSize:'0.6rem', letterSpacing:'0.2em', textTransform:'uppercase',
+            color:'#aacaaa', transition:'color 0.2s', padding:0,
+          }}
+          onMouseEnter={e => e.target.style.color = '#2a7a2a'}
+          onMouseLeave={e => e.target.style.color = '#aacaaa'}
+        >Close</button>
       </div>
     </>
   );
@@ -628,45 +936,67 @@ function DetailPanel({ marker, onClose }) {
 
 function ZBtn({ ch, action }) {
   return (
-    <button onClick={action} style={{ width:36, height:36, pointerEvents:'all', background:'rgba(251,253,249,0.94)', border:'1px solid rgba(60,130,60,0.2)', color:'#8aaa8a', fontFamily:'"Cormorant Garamond", serif', fontSize: ch==='⊙' ? '1.1rem' : '1.35rem', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', backdropFilter:'blur(8px)', transition:'all 0.2s', lineHeight:1 }} onMouseEnter={e => { e.currentTarget.style.borderColor='rgba(60,130,60,0.52)'; e.currentTarget.style.color='#2a7a2a'; }} onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(60,130,60,0.2)';  e.currentTarget.style.color='#8aaa8a'; }}>{ch}</button>
+    <button
+      onClick={action}
+      style={{
+        width:36, height:36, pointerEvents:'all',
+        background:'rgba(251,253,249,0.94)',
+        border:'1px solid rgba(60,130,60,0.2)',
+        color:'#8aaa8a',
+        fontFamily:'"Cormorant Garamond", serif',
+        fontSize: ch==='⊙' ? '1.1rem' : '1.35rem',
+        cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center',
+        backdropFilter:'blur(8px)', transition:'all 0.2s', lineHeight:1,
+      }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor='rgba(60,130,60,0.52)'; e.currentTarget.style.color='#2a7a2a'; }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(60,130,60,0.2)';  e.currentTarget.style.color='#8aaa8a'; }}
+    >{ch}</button>
   );
 }
 
+/* ═══════════════════════════════════════
+   HERO INTRO SECTION — Spring Physics Floating Objects
+   Images are placed in the same folder as index.html (repo root)
+═══════════════════════════════════════ */
+
 const FLOAT_IMGS = [
-  './assets/IMG_7640-removebg-preview.png',
-  './assets/IMG_7641-removebg-preview.png',
-  './assets/IMG_7642-removebg-preview.png',
-  './assets/IMG_7643-removebg-preview.png',
-  './assets/IMG_7645-removebg-preview.png',
-  './assets/IMG_7647-removebg-preview.png',
-  './assets/IMG_7649-removebg-preview.png',
-  './assets/IMG_7650-removebg-preview.png',
-  './assets/IMG_7651-removebg-preview.png',
-  './assets/IMG_7652-removebg-preview.png',
-  './assets/IMG_7654-removebg-preview.png',
-  './assets/IMG_7655-removebg-preview (1).png',
-  './assets/IMG_7657-removebg-preview.png',
-  './assets/IMG_7658-removebg-preview.png',
-  './assets/IMG_7659-removebg-preview.png',
-  './assets/IMG_7660-removebg-preview.png',
-  './assets/IMG_7662-removebg-preview.png',
-  './assets/IMG_7662-removebg-preview (1).png',
-  './assets/IMG_7663-removebg-preview.png',
-  './assets/IMG_7664-removebg-preview.png',
-  './assets/IMG_7665-removebg-preview.png',
-  './assets/image-from-rawpixel-id-4096231-png.png',
-  './assets/image-from-rawpixel-id-13217345-png.png',
-  './assets/image-from-rawpixel-id-13217594-png.png',
-  './assets/image-from-rawpixel-id-13454048-png.png',
-  './assets/image-from-rawpixel-id-15549802-png.png',
-  './assets/image-from-rawpixel-id-16923161-png.png',
-  './assets/image-from-rawpixel-id-21722552-jpeg-removebg-preview.png',
-  './assets/image-from-rawpixel-id-21730209-jpeg-removebg-preview.png',
-  './assets/image-from-rawpixel-id-24970024-jpeg-removebg-preview.png',
-  './assets/image-from-rawpixel-id-25889416-jpeg-removebg-preview.png',
+  './IMG_7640-removebg-preview.png',
+  './IMG_7641-removebg-preview.png',
+  './IMG_7642-removebg-preview.png',
+  './IMG_7643-removebg-preview.png',
+  './IMG_7645-removebg-preview.png',
+  './IMG_7647-removebg-preview.png',
+  './IMG_7649-removebg-preview.png',
+  './IMG_7650-removebg-preview.png',
+  './IMG_7651-removebg-preview.png',
+  './IMG_7652-removebg-preview.png',
+  './IMG_7654-removebg-preview.png',
+  './IMG_7655-removebg-preview (1).png',
+  './IMG_7657-removebg-preview.png',
+  './IMG_7658-removebg-preview.png',
+  './IMG_7659-removebg-preview.png',
+  './IMG_7660-removebg-preview.png',
+  './IMG_7662-removebg-preview.png',
+  './IMG_7662-removebg-preview (1).png',
+  './IMG_7663-removebg-preview.png',
+  './IMG_7664-removebg-preview.png',
+  './IMG_7665-removebg-preview.png',
+  './image-from-rawpixel-id-4096231-png.png',
+  './image-from-rawpixel-id-13217345-png.png',
+  './image-from-rawpixel-id-13217594-png.png',
+  './image-from-rawpixel-id-13454048-png.png',
+  './image-from-rawpixel-id-15549802-png.png',
+  './image-from-rawpixel-id-16923161-png.png',
+  './image-from-rawpixel-id-21722552-jpeg-removebg-preview.png',
+  './image-from-rawpixel-id-21730209-jpeg-removebg-preview.png',
+  './image-from-rawpixel-id-24970024-jpeg-removebg-preview.png',
+  './image-from-rawpixel-id-25889416-jpeg-removebg-preview.png',
 ];
 
-function _srng(seed) { let s = seed; return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; }
+function _srng(seed) {
+  let s = seed;
+  return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+}
 const _rng = _srng(2025);
 
 const FLOAT_OBJS = FLOAT_IMGS.map((src, i) => {
@@ -688,72 +1018,116 @@ const FLOAT_OBJS = FLOAT_IMGS.map((src, i) => {
   return { src, idleX, idleY, sizeVmin, rot0, floatAmp, floatFreq, floatPhase, floatRotAmp, clusterIdx, clusterSubIdx };
 });
 
-const SP_K = 0.09, SP_D = 0.82, SP_KR = 0.08, SP_DR = 0.80, CLUSTER_R = 230;
+const SP_K  = 0.09;
+const SP_D  = 0.82;
+const SP_KR = 0.08;
+const SP_DR = 0.80;
+const CLUSTER_R = 230;
 
 function HeroSection({ onGone }) {
   const [exiting, setExiting] = React.useState(false);
-  const containerRef = React.useRef(null), elRefs = React.useRef([]);
-  const textRef = React.useRef(null), physRef = React.useRef(null);
-  const rafRef = React.useRef(null), mouseRef = React.useRef({ x: -9999, y: -9999 });
+  const containerRef   = React.useRef(null);
+  const elRefs         = React.useRef([]);
+  const textRef        = React.useRef(null);
+  const physRef        = React.useRef(null);
+  const rafRef         = React.useRef(null);
+  const mouseRef       = React.useRef({ x: -9999, y: -9999 });
   const wheelScrollRef = React.useRef(0);
 
   React.useEffect(() => {
     document.getElementById('map-wrap')?.classList.add('hero-mode');
-    window.mapReady.then(() => { window.mapInstance?.jumpTo({ center: [-8, 52], zoom: 4.5 }); });
+    window.mapReady.then(() => {
+      window.mapInstance?.jumpTo({ center: [-8, 52], zoom: 4.5 });
+    });
+
     const W = window.innerWidth, H = window.innerHeight;
-    physRef.current = FLOAT_OBJS.map(obj => ({ x: (obj.idleX / 100) * W, y: (obj.idleY / 100) * H, vx: 0, vy: 0, rot: obj.rot0, vrot: 0 }));
+
+    physRef.current = FLOAT_OBJS.map(obj => ({
+      x: (obj.idleX / 100) * W,
+      y: (obj.idleY / 100) * H,
+      vx: 0, vy: 0, rot: obj.rot0, vrot: 0,
+    }));
+
     const onMouse = e => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
     window.addEventListener('mousemove', onMouse);
-    const onWheel = e => { wheelScrollRef.current = Math.max(0, Math.min(H * 0.85, wheelScrollRef.current + e.deltaY * 0.65)); };
+
+    const onWheel = e => {
+      wheelScrollRef.current = Math.max(0, Math.min(H * 0.85, wheelScrollRef.current + e.deltaY * 0.65));
+    };
     window.addEventListener('wheel', onWheel, { passive: true });
+
     const loop = now => {
-      const t = now / 1000, W = window.innerWidth, H = window.innerHeight;
-      const cx = W / 2, cy = H / 2, minDim = Math.min(W, H);
-      const scroll = wheelScrollRef.current, { x: mx, y: my } = mouseRef.current;
-      const magnetic = (Math.hypot(mx - cx, my - cy) < 300) && (mx > 0);
+      const t  = now / 1000;
+      const W  = window.innerWidth, H = window.innerHeight;
+      const cx = W / 2, cy = H / 2;
+      const minDim  = Math.min(W, H);
+      const scroll  = wheelScrollRef.current;
+      const { x: mx, y: my } = mouseRef.current;
+      const distToCenter = Math.hypot(mx - cx, my - cy);
+      const magnetic = (distToCenter < 300) && (mx > 0);
+
       const clusterPts = Array.from({ length: 8 }, (_, ci) => {
         const angle = -Math.PI / 2 + (ci / 8) * Math.PI * 2;
         const r = CLUSTER_R + (ci % 2 === 0 ? 0 : 32);
         return { x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r };
       });
-      const phys = physRef.current;
+
+      const phys       = physRef.current;
       const scrollFade = Math.max(0, 1 - scroll / (H * 0.5));
-      const scrollUp = scroll * 0.42;
+      const scrollUp   = scroll * 0.42;
+
       phys.forEach((s, i) => {
         const obj = FLOAT_OBJS[i];
         let tx, ty, tRot;
+
         if (magnetic) {
-          const cp = clusterPts[obj.clusterIdx];
+          const cp       = clusterPts[obj.clusterIdx];
           const subAngle = (obj.clusterSubIdx / 4) * Math.PI * 2;
-          const subR = 20 + obj.clusterSubIdx * 20;
-          tx = cp.x + Math.cos(subAngle) * subR; ty = cp.y + Math.sin(subAngle) * subR;
+          const subR     = 20 + obj.clusterSubIdx * 20;
+          tx   = cp.x + Math.cos(subAngle) * subR;
+          ty   = cp.y + Math.sin(subAngle) * subR;
           tRot = obj.rot0 * 0.22 + obj.clusterIdx * 11 - 38;
         } else {
           const fsin = Math.sin(t * obj.floatFreq * Math.PI * 2 + obj.floatPhase);
           const fcos = Math.cos(t * obj.floatFreq * Math.PI * 2 * 0.61 + obj.floatPhase + 1.1);
-          tx = (obj.idleX / 100) * W + fsin * obj.floatAmp;
-          ty = (obj.idleY / 100) * H + fcos * obj.floatAmp * 0.68;
+          tx   = (obj.idleX / 100) * W + fsin * obj.floatAmp;
+          ty   = (obj.idleY / 100) * H + fcos * obj.floatAmp * 0.68;
           tRot = obj.rot0 + fsin * obj.floatRotAmp;
         }
-        s.vx = s.vx * SP_D - SP_K * (s.x - tx); s.vy = s.vy * SP_D - SP_K * (s.y - ty);
-        s.vrot = s.vrot * SP_DR - SP_KR * (s.rot - tRot);
-        s.x += s.vx; s.y += s.vy; s.rot += s.vrot;
+
+        s.vx   = s.vx   * SP_D  - SP_K  * (s.x   - tx);
+        s.vy   = s.vy   * SP_D  - SP_K  * (s.y   - ty);
+        s.vrot = s.vrot * SP_DR - SP_KR * (s.rot  - tRot);
+        s.x   += s.vx;
+        s.y   += s.vy;
+        s.rot += s.vrot;
+
         const el = elRefs.current[i];
         if (el) {
           const sizePx = (obj.sizeVmin / 100) * minDim;
-          el.style.transform = `translate(${(s.x - sizePx/2).toFixed(1)}px,${(s.y - sizePx/2 - scrollUp).toFixed(1)}px) rotate(${s.rot.toFixed(2)}deg)`;
-          el.style.opacity = (0.88 * scrollFade).toFixed(3);
+          const px = s.x - sizePx / 2;
+          const py = s.y - sizePx / 2 - scrollUp;
+          el.style.transform = `translate(${px.toFixed(1)}px,${py.toFixed(1)}px) rotate(${s.rot.toFixed(2)}deg)`;
+          el.style.opacity   = (0.88 * scrollFade).toFixed(3);
         }
       });
+
       const txt = textRef.current;
       if (txt) {
         txt.style.transform = `translate(-50%, calc(-50% - ${(scroll * 0.55).toFixed(1)}px))`;
-        txt.style.opacity = Math.max(0, 1 - scroll / (H * 0.28)).toFixed(3);
+        txt.style.opacity   = Math.max(0, 1 - scroll / (H * 0.28)).toFixed(3);
       }
+
       rafRef.current = requestAnimationFrame(loop);
     };
+
     rafRef.current = requestAnimationFrame(loop);
-    return () => { window.removeEventListener('mousemove', onMouse); window.removeEventListener('wheel', onWheel); cancelAnimationFrame(rafRef.current); };
+
+    return () => {
+      window.removeEventListener('mousemove', onMouse);
+      window.removeEventListener('wheel', onWheel);
+      cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   const handleEnter = () => {
@@ -761,61 +1135,167 @@ function HeroSection({ onGone }) {
     setExiting(true);
     cancelAnimationFrame(rafRef.current);
     document.getElementById('map-wrap')?.classList.remove('hero-mode');
-    window.mapReady.then(() => window.mapInstance?.flyTo({ center: [12, 22], zoom: 1.72, duration: 2600, curve: 1.5, essential: true }));
+    window.mapReady.then(() =>
+      window.mapInstance?.flyTo({
+        center: [12, 22], zoom: 1.72,
+        duration: 2600, curve: 1.5, essential: true,
+      })
+    );
     setTimeout(onGone, 1200);
   };
 
   return (
-    <div ref={containerRef} onClick={handleEnter} style={{ position:'fixed', inset:0, zIndex:100, background:'#f9f8f5', cursor:'pointer', opacity: exiting ? 0 : 1, transform: exiting ? 'scale(1.05)' : 'scale(1)', transition: exiting ? 'opacity 1.2s cubic-bezier(0.22,1,0.36,1), transform 1.3s cubic-bezier(0.22,1,0.36,1)' : 'none', pointerEvents: exiting ? 'none' : 'all', overflow:'hidden', userSelect:'none' }}>
+    <div
+      ref={containerRef}
+      onClick={handleEnter}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 100,
+        background: '#f9f8f5',
+        cursor: 'pointer',
+        opacity: exiting ? 0 : 1,
+        transform: exiting ? 'scale(1.05)' : 'scale(1)',
+        transition: exiting
+          ? 'opacity 1.2s cubic-bezier(0.22,1,0.36,1), transform 1.3s cubic-bezier(0.22,1,0.36,1)'
+          : 'none',
+        pointerEvents: exiting ? 'none' : 'all',
+        overflow: 'hidden',
+        userSelect: 'none',
+      }}
+    >
       {FLOAT_OBJS.map((obj, i) => (
-        <div key={i} ref={el => elRefs.current[i] = el} style={{ position:'absolute', top:0, left:0, width:`${obj.sizeVmin}vmin`, height:`${obj.sizeVmin}vmin`, willChange:'transform, opacity', pointerEvents:'none' }}>
-          <img src={obj.src} alt="" draggable="false" style={{ width:'100%', height:'100%', objectFit:'contain', display:'block' }}/>
+        <div
+          key={i}
+          ref={el => elRefs.current[i] = el}
+          style={{
+            position: 'absolute',
+            top: 0, left: 0,
+            width:  `${obj.sizeVmin}vmin`,
+            height: `${obj.sizeVmin}vmin`,
+            willChange: 'transform, opacity',
+            pointerEvents: 'none',
+          }}
+        >
+          <img
+            src={obj.src}
+            alt=""
+            draggable="false"
+            style={{ width:'100%', height:'100%', objectFit:'contain', display:'block' }}
+          />
         </div>
       ))}
-      <div style={{ position:'absolute', inset:0, pointerEvents:'none', zIndex:5, background:'radial-gradient(ellipse 46% 48% at 50% 50%, transparent 0%, rgba(249,248,245,0.68) 100%)' }}/>
-      <div ref={textRef} style={{ position:'absolute', zIndex:10, top:'50%', left:'50%', transform:'translate(-50%, -50%)', textAlign:'center', pointerEvents:'none', willChange:'transform, opacity' }}>
-        <h1 style={{ margin:0, fontFamily:'"Cormorant Garamond", "Cormorant", serif', fontWeight:300, fontSize:'clamp(1.9rem, 4.2vw, 3.4rem)', letterSpacing:'0.12em', color:'#1c2a14', lineHeight:1.12, animation:'heroFadeUp 1.3s 0.35s both' }}>Lucky Clover · World Map</h1>
-        <p style={{ margin:'1.5rem 0 0', fontFamily:'"Cormorant Garamond", serif', fontStyle:'italic', fontWeight:300, fontSize:'clamp(0.6rem, 1.1vw, 0.85rem)', letterSpacing:'0.30em', textTransform:'uppercase', color:'rgba(72,108,54,0.48)', animation:'heroFadeUp 1s 0.80s both' }}>click anywhere to begin</p>
+
+      <div style={{
+        position:'absolute', inset:0, pointerEvents:'none', zIndex:5,
+        background:'radial-gradient(ellipse 46% 48% at 50% 50%, transparent 0%, rgba(249,248,245,0.68) 100%)',
+      }}/>
+
+      <div
+        ref={textRef}
+        style={{
+          position: 'absolute', zIndex: 10,
+          top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          textAlign: 'center',
+          pointerEvents: 'none',
+          willChange: 'transform, opacity',
+        }}
+      >
+        <h1 style={{
+          margin: 0,
+          fontFamily: '"Cormorant Garamond", "Cormorant", serif',
+          fontWeight: 300,
+          fontSize: 'clamp(1.9rem, 4.2vw, 3.4rem)',
+          letterSpacing: '0.12em',
+          color: '#1c2a14',
+          lineHeight: 1.12,
+          animation: 'heroFadeUp 1.3s 0.35s both',
+        }}>Lucky Clover · World Map</h1>
+
+        <p style={{
+          margin: '1.5rem 0 0',
+          fontFamily: '"Cormorant Garamond", serif',
+          fontStyle: 'italic',
+          fontWeight: 300,
+          fontSize: 'clamp(0.6rem, 1.1vw, 0.85rem)',
+          letterSpacing: '0.30em',
+          textTransform: 'uppercase',
+          color: 'rgba(72,108,54,0.48)',
+          animation: 'heroFadeUp 1s 0.80s both',
+        }}>click anywhere to begin</p>
       </div>
     </div>
   );
 }
 
 function App() {
-  const [markers,      setMarkers]      = useState(() => { try { const saved = JSON.parse(localStorage.getItem('clover-v3') || 'null'); if (!saved || !Array.isArray(saved)) return SAMPLES; if (saved.length && saved[0].svgX !== undefined) return SAMPLES; return saved.filter(m => m.id && typeof m.id === 'number') || SAMPLES; } catch { return SAMPLES; } });
+  const [markers,      setMarkers]      = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('clover-v3') || 'null');
+      if (!saved || !Array.isArray(saved)) return SAMPLES;
+      if (saved.length && saved[0].svgX !== undefined) return SAMPLES;
+      return saved.filter(m => m.id && typeof m.id === 'number') || SAMPLES;
+    } catch { return SAMPLES; }
+  });
   const [heroGone,     setHeroGone]     = useState(false);
   const [pendingPos,   setPendingPos]   = useState(null);
   const [showUpload,   setShowUpload]   = useState(false);
   const [activeMarker, setActiveMarker] = useState(null);
   const mapDots = useRef({});
 
-  useEffect(() => { localStorage.setItem('clover-v3', JSON.stringify(markers)); }, [markers]);
+  useEffect(() => {
+    localStorage.setItem('clover-v3', JSON.stringify(markers));
+  }, [markers]);
 
   const makeDotEl = useCallback((data, fresh = false) => {
     const el = document.createElement('div');
     el.className = `clover-dot${fresh ? ' clover-dot--fresh' : ''}`;
-    if (window.cloverPNGCanvas) { const clone = document.createElement('canvas'); clone.width = clone.height = 26; clone.getContext('2d').drawImage(window.cloverPNGCanvas, 0, 0); el.appendChild(clone); }
-    else if (typeof window.makeCloverCanvas === 'function') { el.appendChild(window.makeCloverCanvas(26, 0.86)); }
+
+    if (window.cloverPNGCanvas) {
+      const clone = document.createElement('canvas');
+      clone.width = clone.height = 26;
+      clone.getContext('2d').drawImage(window.cloverPNGCanvas, 0, 0);
+      el.appendChild(clone);
+    } else if (typeof window.makeCloverCanvas === 'function') {
+      el.appendChild(window.makeCloverCanvas(26, 0.86));
+    }
+
     el.title = data.location || '';
-    el.addEventListener('click', () => { window.suppressNextMapClick?.(); setActiveMarker(data); });
+    el.addEventListener('click', () => {
+      window.suppressNextMapClick?.();
+      setActiveMarker(data);
+    });
     return el;
   }, []);
 
   const placeDot = useCallback((data, fresh = false) => {
     if (mapDots.current[data.id]) mapDots.current[data.id].remove();
     const el = makeDotEl(data, fresh);
-    const dot = new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([data.lon, data.lat]).addTo(window.mapInstance);
+    const dot = new maplibregl.Marker({ element: el, anchor: 'center' })
+      .setLngLat([data.lon, data.lat])
+      .addTo(window.mapInstance);
     mapDots.current[data.id] = dot;
   }, [makeDotEl]);
 
   useEffect(() => {
-    window.mapReady.then(() => { markers.forEach(m => placeDot(m, false)); window.onMapClick = (lng, lat) => { setPendingPos({ lng, lat }); setShowUpload(true); }; });
+    window.mapReady.then(() => {
+      markers.forEach(m => placeDot(m, false));
+      window.onMapClick = (lng, lat) => {
+        setPendingPos({ lng, lat });
+        setShowUpload(true);
+      };
+    });
     return () => { window.onMapClick = null; };
   }, []);
 
   const handleAdd = useCallback(({ preview, location, note }) => {
     if (!pendingPos) return;
-    const m = { id: Date.now(), lat: +pendingPos.lat.toFixed(5), lon: +pendingPos.lng.toFixed(5), preview, location, note, ts: Date.now() };
+    const m = {
+      id: Date.now(),
+      lat: +pendingPos.lat.toFixed(5),
+      lon: +pendingPos.lng.toFixed(5),
+      preview, location, note,
+      ts: Date.now(),
+    };
     setMarkers(prev => [...prev, m]);
     window.mapReady.then(() => placeDot(m, true));
     setPendingPos(null);
@@ -830,29 +1310,88 @@ function App() {
       {!heroGone && (
         <HeroSection onGone={() => {
           setHeroGone(true);
-          ['eco-badge','data-import','eco-toggle'].forEach(id => { const el = document.getElementById(id); if (el) { el.style.transition = 'opacity 0.9s 0.25s ease'; el.style.opacity = '1'; } });
+          ['eco-badge','data-import','eco-toggle'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) { el.style.transition = 'opacity 0.9s 0.25s ease'; el.style.opacity = '1'; }
+          });
         }} />
       )}
+
       <Particles/>
-      <div style={{ position:'fixed', inset:0, zIndex:7, pointerEvents:'none', background:'radial-gradient(ellipse 90% 88% at 50% 50%, transparent 52%, rgba(224,234,222,0.38) 100%)' }}/>
-      <div style={{ opacity: heroGone ? 1 : 0, transition: heroGone ? 'opacity 0.9s 0.2s ease' : 'none', pointerEvents:'none' }}>
-        <header style={{ position:'fixed', top:0, left:0, right:0, zIndex:8, padding:'2.2rem 2rem 4rem', textAlign:'center', pointerEvents:'none', background:'linear-gradient(to bottom, rgba(247,249,244,0.9) 0%, rgba(247,249,244,0) 100%)' }}>
-          <p className="anim-fade-up" style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.57rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'#6a9a6a', marginBottom:'0.55rem', opacity:0, animationDelay:'0.1s' }}>A World of Lucky Moments</p>
-          <h1 className="anim-fade-up" style={{ fontFamily:'"Cormorant", "Cormorant Garamond", serif', fontWeight:300, fontSize:'clamp(1.55rem, 2.8vw, 2.6rem)', color:'#1a3a1a', letterSpacing:'0.07em', lineHeight:1.15, opacity:0, animationDelay:'0.3s' }}>Lucky Clover&nbsp;<em style={{ color:'#5aaa5a', fontStyle:'italic', fontWeight:300 }}>·</em>&nbsp;World Map</h1>
-          <p className="anim-fade-up" style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.84rem', fontStyle:'italic', color:'#9abaaa', marginTop:'0.55rem', letterSpacing:'0.03em', opacity:0, animationDelay:'0.55s' }}>Click anywhere on the map to mark where you found yours</p>
+
+      <div style={{
+        position:'fixed', inset:0, zIndex:7, pointerEvents:'none',
+        background:'radial-gradient(ellipse 90% 88% at 50% 50%, transparent 52%, rgba(224,234,222,0.38) 100%)',
+      }}/>
+
+      <div style={{
+        opacity: heroGone ? 1 : 0,
+        transition: heroGone ? 'opacity 0.9s 0.2s ease' : 'none',
+        pointerEvents: 'none',
+      }}>
+
+        <header style={{
+          position:'fixed', top:0, left:0, right:0, zIndex:8,
+          padding:'2.2rem 2rem 4rem', textAlign:'center',
+          pointerEvents:'none',
+          background:'linear-gradient(to bottom, rgba(247,249,244,0.9) 0%, rgba(247,249,244,0) 100%)',
+        }}>
+          <p
+            className="anim-fade-up"
+            style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.57rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'#6a9a6a', marginBottom:'0.55rem', opacity:0, animationDelay:'0.1s' }}
+          >
+            A World of Lucky Moments
+          </p>
+          <h1
+            className="anim-fade-up"
+            style={{ fontFamily:'"Cormorant", "Cormorant Garamond", serif', fontWeight:300, fontSize:'clamp(1.55rem, 2.8vw, 2.6rem)', color:'#1a3a1a', letterSpacing:'0.07em', lineHeight:1.15, opacity:0, animationDelay:'0.3s' }}
+          >
+            Lucky Clover&nbsp;<em style={{ color:'#5aaa5a', fontStyle:'italic', fontWeight:300 }}>·</em>&nbsp;World Map
+          </h1>
+          <p
+            className="anim-fade-up"
+            style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.84rem', fontStyle:'italic', color:'#9abaaa', marginTop:'0.55rem', letterSpacing:'0.03em', opacity:0, animationDelay:'0.55s' }}
+          >
+            Click anywhere on the map to mark where you found yours
+          </p>
         </header>
+
         <div style={{ position:'fixed', bottom:'2.4rem', right:'2rem', zIndex:12, display:'flex', flexDirection:'column', gap:'5px', pointerEvents: heroGone ? 'all' : 'none' }}>
-          <ZBtn ch="+" action={zoomIn}/><ZBtn ch="⊙" action={home}/><ZBtn ch="−" action={zoomOut}/>
+          <ZBtn ch="+" action={zoomIn}/>
+          <ZBtn ch="⊙" action={home}/>
+          <ZBtn ch="−" action={zoomOut}/>
         </div>
-        <div style={{ position:'fixed', bottom:'2.6rem', left:'2rem', zIndex:12, fontFamily:'"Cormorant Garamond", serif', fontSize:'0.62rem', letterSpacing:'0.2em', textTransform:'uppercase', color:'#9abaaa', pointerEvents:'none' }}>
+
+        <div style={{
+          position:'fixed', bottom:'2.6rem', left:'2rem', zIndex:12,
+          fontFamily:'"Cormorant Garamond", serif',
+          fontSize:'0.62rem', letterSpacing:'0.2em', textTransform:'uppercase', color:'#9abaaa',
+          pointerEvents:'none',
+        }}>
           {markers.length}&nbsp;{markers.length === 1 ? 'clover' : 'clovers'}&nbsp;found worldwide
         </div>
-        <footer style={{ position:'fixed', bottom:0, left:0, right:0, zIndex:5, padding:'0.6rem', textAlign:'center', pointerEvents:'none', background:'linear-gradient(to top, rgba(247,249,244,0.65) 0%, transparent 100%)' }}>
-          <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.54rem', color:'#b8c8b8', letterSpacing:'0.16em' }}>Click to record a finding &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Drag to explore</p>
+
+        <footer style={{
+          position:'fixed', bottom:0, left:0, right:0, zIndex:5,
+          padding:'0.6rem', textAlign:'center', pointerEvents:'none',
+          background:'linear-gradient(to top, rgba(247,249,244,0.65) 0%, transparent 100%)',
+        }}>
+          <p style={{ fontFamily:'"Cormorant Garamond", serif', fontSize:'0.54rem', color:'#b8c8b8', letterSpacing:'0.16em' }}>
+            Click to record a finding &nbsp;·&nbsp; Scroll to zoom &nbsp;·&nbsp; Drag to explore
+          </p>
         </footer>
+
       </div>
-      {showUpload && <UploadModal onClose={() => { setShowUpload(false); setPendingPos(null); }} onSubmit={handleAdd}/>}
-      {activeMarker && <DetailPanel marker={activeMarker} onClose={() => setActiveMarker(null)}/>}
+
+      {showUpload && (
+        <UploadModal
+          onClose={() => { setShowUpload(false); setPendingPos(null); }}
+          onSubmit={handleAdd}
+        />
+      )}
+      {activeMarker && (
+        <DetailPanel marker={activeMarker} onClose={() => setActiveMarker(null)}/>
+      )}
     </>
   );
 }
